@@ -1,4 +1,6 @@
 # HELLO_SHOP
+회원,상품,주문, 웹 계층 개발
+
 ![image](https://user-images.githubusercontent.com/112360835/207264694-7b2c4f8d-5dde-4ad4-8a8e-7a79ec72429f.png)
 <br>
 # 🧩 엔티티 클래스 설계<br>
