@@ -40,7 +40,7 @@ public class ItemController {
 		item.setName(itemform.getName());
 		item.setPrice(itemform.getPrice());
 		item.setStockQuantity(itemform.getStockQuantity());
-		
+			
 		itemService.saveItem(item);
 		
 		return "redirect:/";
@@ -88,7 +88,9 @@ public class ItemController {
         
 //		itemService.saveItem(item); // merge
 		
+		// 변경감지, 비영속상태의 데이터를 영속성 컨텍스트에 속해있는 영속상태의 영역으로 넘기려면.
 		itemService.updateItem(itemId,form.getName(),form.getPrice(),form.getStockQuantity());
+		
 		return "redirect:/items";
 	}
 }

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -32,7 +33,7 @@ public class Order {
 	private Member member;
 	private LocalDateTime orderDate;
 	
-	@OneToMany(mappedBy = "order")
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
 	private List<OrderItem> orderItems
 		= new ArrayList<OrderItem>();
 	
@@ -52,5 +53,27 @@ public class Order {
 		orderItem.setOrder(this);
 	}
 	//////// 연관관계 메서드
+	
+	public static Order createOrder(Member member, OrderItem... orderItems) {
+		Order order = new Order();
+		order.setMember(member);
+		
+		for(OrderItem orderItem : orderItems) {
+			order.addOrderItem(orderItem);
+		}
+		
+		order.setOrderStatus(OrderStatus.ORDER);
+		order.setOrderDate(LocalDateTime.now());
+		
+		return order;
+	}
+
+	// 주문 취소
+	public void cancel() {
+		this.setOrderStatus(orderStatus.CANCEL);
+		for(OrderItem orderItem : orderItems) {
+			orderItem.cancel();
+		}
+	}
 	
 }
